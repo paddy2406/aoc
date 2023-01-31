@@ -1,26 +1,29 @@
-use std::fs;
-use regex::Regex;
-
 fn main() {
-  let input = fs::read_to_string("input.txt").unwrap();
-
-  println!("Part One: {:?}", part_one(input.clone()));
+  let input = "bgvyzdsv";
+  println!("Part One: {:?}", part_one(input));
   println!("Part Two: {:?}", part_two(input));
 }
 
-fn part_one(input: String) -> usize {
-  let escape_backslash_quote_regex = Regex::new(r#"(?:\\")|(?:\\\\)"#).unwrap();
-  let hex_regex = Regex::new(r#"\\x"#).unwrap();
-  let mut res = 0;
-  for line in input.lines() {
-    println!("{:?}",line.chars());
-    
-    res +=  line.chars().count() - 2 - escape_backslash_quote_regex.find_iter(line).count() - 3 * hex_regex.find_iter(line).count();
+fn part_one(input: &str) -> i32 {
+  let mut i = 1;
+  loop {
+    let peter = format!("{:x}", md5::compute(format!("{}{}", input, i)));
+    if peter.starts_with("00000") {
+      break;
+    }
+    i += 1;
   }
- 
-  return res;
+  return i;
 }
 
-fn part_two(input: String) -> i32 {
-  return 1;
+fn part_two(input: &str) -> i32 {
+  let mut i = 1;
+  loop {
+    let peter = format!("{:x}", md5::compute(format!("{}{}", input, i)));
+    if peter.starts_with("000000") {
+      break;
+    }
+    i += 1;
+  }
+  return i;
 }
