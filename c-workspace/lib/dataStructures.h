@@ -5,16 +5,18 @@ typedef struct string_list string_list_t;
 
 typedef struct node node_t;
 
-void print_list(string_list_t* list);
+void print(string_list_t* list);
 
-string_list_t* create_list(char* firstValue);
+string_list_t* create_list();
 
-void append_list(string_list_t* list, char* value);
+void push(string_list_t* list, char* value);
 
-void prepend_list(string_list_t* list, char* value);
+void prepend(string_list_t* list, char* value);
 
-void delete_list(string_list_t* list);
+void delete(string_list_t* list);
 
-int length_list(string_list_t* list);
+int length(string_list_t* list);
+
+
 
 #endif

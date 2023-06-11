@@ -5,31 +5,34 @@
 #include "lib/ioUtils.h"
 #include "lib/dataStructures.h"
 
-/* 
-  char *content = readFileToString("input.txt");
-  printf("%s\n", content); 
-  free(content);
-*/
 
+void list_test(){
+  string_list_t* list = create_list();
 
+  push(list, strdup("lustig"));
+  push(list, strdup("macht"));
+  push(list, strdup("jetzt"));
+  push(list, strdup("feierabend"));
+
+  prepend(list, strdup("firster"));
+  prepend(list, strdup("am firstesten")); 
+  
+  print(list);
+  
+  printf("%d\n", length(list));
+  
+  delete(list);
+}
 
 
 int main() {  
-  string_list_t* list = create_list("first");
+  char *content = readFileToString("input.txt");
 
-  append_list(list, "peter");
-  append_list(list, "lustig");
-  append_list(list, "macht");
-  append_list(list, "jetzt");
-  append_list(list, "feierabend");
-
-  prepend_list(list, "firster");
-  prepend_list(list, "am firstesten");
+  string_list_t* splittedInput = split(content, ", ");
   
-  print_list(list);
   
-  printf("%d\n", length_list(list));
 
-  delete_list(list);
 }
+
+
 
