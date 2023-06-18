@@ -17,6 +17,6 @@ void delete(string_list_t* list);
 
 int length(string_list_t* list);
 
-
+char* next(string_list_t* list);
 
 #endif

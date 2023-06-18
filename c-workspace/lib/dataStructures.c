@@ -5,6 +5,7 @@
 
 typedef struct string_list {
     struct node* head;
+    struct node** current;
 } string_list_t;
 
 
@@ -26,6 +27,7 @@ void print(string_list_t* list) {
 string_list_t* create_list(){
   string_list_t* list = (string_list_t *) malloc(sizeof(string_list_t));
   list->head = NULL;
+  list->current = &list->head;
   return list;
 }
 
@@ -70,5 +72,15 @@ int length(string_list_t* list){
     length++;
   }
   return length;
+}
+
+char* next(string_list_t* list){
+  if(*list->current == NULL){
+    return NULL;
+  }else{
+    char* temp = (*list->current)->val;
+    list->current = &(*list->current)->next;
+    return temp;
+  }
 }
 

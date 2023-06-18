@@ -18,38 +18,44 @@ string_list_t* split(char* input, char* delimiter){
   int temp_index = 0;
   string_list_t* list = create_list();
   while (*input != '\0') {
-    printf("%c\n", *input);
     if(*input != *temp_delimiter){
-      printf("ping%c\n",  *input);
+      // delemiter not active
       temp[temp_index] = *input;
       temp_index++;
       input++;
     } else {
-      printf("pong%c\n",  *input);
+      // delemiter active
       char temp2[10];
       int temp_index2 = 0;
       int failed = 0;
       while(*temp_delimiter != '\0'){
-        temp2[temp_index2] = *input;
-        input++;
-        temp_index2++;
         if(*input != *temp_delimiter){
           failed = 1;
+          temp2[temp_index2] = '\0';
           break;
         }
-
-      } 
+        temp2[temp_index2] = *input;
+        temp_index2++;
+        input++;
+        temp_delimiter++;
+      }
       if(failed){
         strcat(temp,temp2);
       }else{
-        char* peter = (char*) malloc(temp_index2 + 1);
+        char* peter = (char*) malloc(temp_index + 1);
+        temp[temp_index] = '\0';
         strcpy(peter, temp);
         memset(&temp[0], 0, sizeof(temp));
         temp_delimiter = delimiter;
         temp_index = 0;
-        printf("%s\n", peter);
+        push(list, peter);
       } 
     }
-    return list;
+    
   }
+  char* last = (char*) malloc(temp_index + 1);
+        temp[temp_index] = '\0';
+        strcpy(last, temp);
+  push(list, last);
+  return list;
 }
