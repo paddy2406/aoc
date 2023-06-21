@@ -97,3 +97,20 @@ int some(string_list_t* list, char* searchTerm) {
   return 0;
 }
 
+/* void list_test(){
+  string_list_t* list = create_list();
+
+  push(list, strdup("lustig"));
+  push(list, strdup("macht"));
+  push(list, strdup("jetzt"));
+  push(list, strdup("feierabend"));
+
+  prepend(list, strdup("firster"));
+  prepend(list, strdup("am firstesten")); 
+  
+  print(list);
+  
+  printf("%d\n", length(list));
+  
+  delete(list);
+} */

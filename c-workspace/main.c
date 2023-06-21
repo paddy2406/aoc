@@ -5,132 +5,98 @@
 #include "lib/ioUtils.h"
 #include "lib/dataStructures.h"
 
-
-/* void list_test(){
-  string_list_t* list = create_list();
-
-  push(list, strdup("lustig"));
-  push(list, strdup("macht"));
-  push(list, strdup("jetzt"));
-  push(list, strdup("feierabend"));
-
-  prepend(list, strdup("firster"));
-  prepend(list, strdup("am firstesten")); 
-  
-  print(list);
-  
-  printf("%d\n", length(list));
-  
-  delete(list);
-} */
-
 void partOne(string_list_t* input);
-
 void partTwo(string_list_t* input);
 
 
 int main() {  
   char *content = readFileToString("input.txt");
   
-
-  string_list_t* splittedInput = split(content, ", ");
+  string_list_t* instructions = split(content, "\n");
   
-  partOne(splittedInput);
+  partOne(instructions);
     
-  partTwo(splittedInput);
+  partTwo(instructions);
 
-  delete(splittedInput);
-
-}
-void partOne(string_list_t* input){
-int x = 0;
-  int y = 0;
-  int direction = 0;
-
-  char* info = next(input);
-  while(info != NULL){
-    if(*info == 'L'){
-      direction--;
-      if(direction < 0) {
-        direction = 3;
-      }
-    }
-    if(*info == 'R'){
-      direction++;
-      if(direction > 3) {
-        direction = 0;
-      }
-    }
-    info++;
-    int temp;
-    sscanf(info, "%d", &temp);
-    if(direction == 0){
-      y = y + temp;
-    }
-    if(direction == 1){
-      x = x + temp;
-    }
-    if(direction == 2){
-      y = y - temp;
-    }
-    if(direction == 3){
-      x = x - temp;
-    }
-
-    info = next(input);
-  }
-  printf(" --- %d --- \n", abs(x) + abs(y));
-  
+  delete(instructions);
 }
 
-void partTwo(string_list_t* input){
-  int x = 0;
-  int y = 0;
-  int field[1000][1000] = {0};
-  int direction = 0;
-  char* info = next(input);
-  while(info != NULL){
-    if(*info == 'L'){
-      direction--;
-      if(direction < 0) {
-        direction = 3;
+void partOne(string_list_t* instructions){
+  char code[5];
+  int codeIndex = 0;
+  int currentButton = 5;
+  char* part = next(instructions);
+  while(part != NULL){
+    while(*part != '\0'){
+      switch (*part){
+      case 'U':
+      if(currentButton > 3){
+        currentButton = currentButton - 3;
       }
-    }
-    if(*info == 'R'){
-      direction++;
-      if(direction > 3) {
-        direction = 0;
+        break;
+      case 'R':
+      if(currentButton % 3 != 0){
+        currentButton++;
       }
+        break;
+      case 'D':
+      if(currentButton < 7){
+        currentButton = currentButton + 3;
+      }
+        break;
+      case 'L':
+      if(currentButton % 3 != 1){
+        currentButton--;
+      }
+        break;
+      default:
+        break;
+      }
+      part++;
     }
-    info++;
-    int temp;
-    sscanf(info, "%d", &temp);
-    
-    if(direction == 0){
-      y = y + temp;
-    }
-    if(direction == 1){
-      x = x + temp;
-    }
-    if(direction == 2){
-      y = y - temp;
-    }
-    if(direction == 3){
-      x = x - temp;
-    }
-    info = next(input);
-    char* tempString = (char*) malloc(15);
-    snprintf(tempString,10, "%d,%d", x,y);
-    if(some(visitedPositions, tempString)){
-      printf(" --- %d --- \n", abs(x) + abs(y));
-      printf(" --- %d --- %d --- \n", x, y);
-      print(visitedPositions);
-      break;
-    }
-    push(visitedPositions, tempString);
-
+    code[codeIndex++] = '0' + currentButton;
+    part = next(instructions);
   }
-  delete(visitedPositions);
+  printf("Part 1: %s\n", code);
+}
+
+
+void partTwo(string_list_t* instructions){
+  char code[5];
+  int codeIndex = 0;
+  int currentButton = 5;
+  char* part = next(instructions);
+  while(part != NULL){
+    while(*part != '\0'){
+      switch (*part){
+      case 'U':
+      if(currentButton != 5 && currentButton != 2 && currentButton != 1 && currentButton != 4 && currentButton != 9){ //macht kein sinn, mach grid mit 0 rand
+        currentButton = currentButton - 3;
+      }
+        break;
+      case 'R':
+      if(currentButton % 3 != 0){
+        currentButton++;
+      }
+        break;
+      case 'D':
+      if(currentButton < 7){
+        currentButton = currentButton + 3;
+      }
+        break;
+      case 'L':
+      if(currentButton % 3 != 1){
+        currentButton--;
+      }
+        break;
+      default:
+        break;
+      }
+      part++;
+    }
+    code[codeIndex++] = '0' + currentButton;
+    part = next(instructions);
+  }
+  printf("Part 2: %c\n", '0');
 } 
-
 

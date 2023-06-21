@@ -14,7 +14,7 @@ char* concat_string(const char* string1, const char* string2) {
 
 string_list_t* split(char* input, char* delimiter){
   char* temp_delimiter = delimiter;
-  char temp[100];
+  char temp[1000];
   int temp_index = 0;
   string_list_t* list = create_list();
   while (*input != '\0') {
