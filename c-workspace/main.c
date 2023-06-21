@@ -24,17 +24,30 @@
   delete(list);
 } */
 
+void partOne(string_list_t* input);
+
+void partTwo(string_list_t* input);
+
 
 int main() {  
   char *content = readFileToString("input.txt");
-  int x = 0;
-  int y = 0;
+  
 
   string_list_t* splittedInput = split(content, ", ");
   
+  partOne(splittedInput);
+    
+  partTwo(splittedInput);
+
+  delete(splittedInput);
+
+}
+void partOne(string_list_t* input){
+int x = 0;
+  int y = 0;
   int direction = 0;
 
-  char* info = next(splittedInput);
+  char* info = next(input);
   while(info != NULL){
     if(*info == 'L'){
       direction--;
@@ -64,14 +77,60 @@ int main() {
       x = x - temp;
     }
 
-    info = next(splittedInput);
-    
-    
+    info = next(input);
   }
   printf(" --- %d --- \n", abs(x) + abs(y));
-  delete(splittedInput);
-
+  
 }
 
+void partTwo(string_list_t* input){
+  int x = 0;
+  int y = 0;
+  int field[1000][1000] = {0};
+  int direction = 0;
+  char* info = next(input);
+  while(info != NULL){
+    if(*info == 'L'){
+      direction--;
+      if(direction < 0) {
+        direction = 3;
+      }
+    }
+    if(*info == 'R'){
+      direction++;
+      if(direction > 3) {
+        direction = 0;
+      }
+    }
+    info++;
+    int temp;
+    sscanf(info, "%d", &temp);
+    
+    if(direction == 0){
+      y = y + temp;
+    }
+    if(direction == 1){
+      x = x + temp;
+    }
+    if(direction == 2){
+      y = y - temp;
+    }
+    if(direction == 3){
+      x = x - temp;
+    }
+    info = next(input);
+    char* tempString = (char*) malloc(15);
+    snprintf(tempString,10, "%d,%d", x,y);
+    if(some(visitedPositions, tempString)){
+      printf(" --- %d --- \n", abs(x) + abs(y));
+      printf(" --- %d --- %d --- \n", x, y);
+      print(visitedPositions);
+      break;
+    }
+    push(visitedPositions, tempString);
+
+  }
+  delete(visitedPositions);
+} 
 
 

@@ -2,6 +2,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 typedef struct string_list {
     struct node* head;
@@ -76,11 +77,23 @@ int length(string_list_t* list){
 
 char* next(string_list_t* list){
   if(*list->current == NULL){
+    list->current = &list->head;
     return NULL;
   }else{
     char* temp = (*list->current)->val;
     list->current = &(*list->current)->next;
     return temp;
   }
+}
+
+int some(string_list_t* list, char* searchTerm) {
+  node_t* current = list->head;
+  while(current != NULL){
+    if(strcmp(current->val, searchTerm) == 0){
+      return 1;
+    }
+    current = current->next;
+  }
+  return 0;
 }
 

@@ -19,4 +19,6 @@ int length(string_list_t* list);
 
 char* next(string_list_t* list);
 
+int some(string_list_t* list, char* searchTerm); 
+
 #endif
