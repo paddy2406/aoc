@@ -7,12 +7,12 @@
       "args": [
         "-fdiagnostics-color=always",
         "-g",
-        "${file}",
+        "/home/paddy/workspace/aoc/c-workspace/main.c",
         "-o",
-        "${fileDirname}/${fileBasenameNoExtension}",
-        "${fileDirname}/lib/stringUtils.c",
-        "${fileDirname}/lib/ioUtils.c",
-        "${fileDirname}/lib/dataStructures.c"
+        "/home/paddy/workspace/aoc/c-workspace/${fileBasenameNoExtension}",
+        "/home/paddy/workspace/aoc/c-workspace/lib/stringUtils.c",
+        "/home/paddy/workspace/aoc/c-workspace/lib/ioUtils.c",
+        "/home/paddy/workspace/aoc/c-workspace/lib/dataStructures.c"
       ],
       "options": {
         "cwd": "${fileDirname}"

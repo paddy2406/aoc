@@ -25,6 +25,7 @@ void print(string_list_t* list) {
   }
 }
 
+/* needs to be freed by calling delete(list)*/
 string_list_t* create_list(){
   string_list_t* list = (string_list_t *) malloc(sizeof(string_list_t));
   list->head = NULL;
@@ -37,7 +38,6 @@ void push(string_list_t* list, char* value){
   while(*current != NULL){
     current = &((*current)->next);
   }
-
   node_t* new_node = ((node_t*) malloc(sizeof(node_t)));
   new_node->val = value;
   new_node->next = NULL;

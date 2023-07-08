@@ -8,11 +8,11 @@
 void partOne(string_list_t* input);
 void partTwo(string_list_t* input);
 
-
 int main() {  
   char *content = readFileToString("input.txt");
-  
-  string_list_t* instructions = split(content, "\n  ");
+
+  string_list_t* instructions = split(content, "\n");
+  printf("%d", length(instructions));
   free(content);
   
   partOne(instructions);
@@ -23,17 +23,14 @@ int main() {
 }
 
 void partOne(string_list_t* instructions){
-  print(instructions);
-  char* line = next(instructions);
-  while(line != NULL){
-    
-  }
-  printf("Part 1: %s\n", "s");
+  int NumberOfLettersMap[26];
+
+  printf("Part 1: %d\n", 1);
 }
 
 
 void partTwo(string_list_t* instructions){
-
-  printf("Part 2: %s\n", "s");
+  
+  printf("Part 2: %d\n", 1);
 } 
 
