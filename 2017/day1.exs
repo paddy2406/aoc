@@ -17,9 +17,10 @@ defmodule Both_parts do
   end
 end
 
-input = File.read!("input.txt")
+input =
+  File.read!("input.txt")
+  |> String.graphemes()
+  |> Enum.map(fn x -> String.to_integer(x) end)
 
-list_of_numbers = Enum.map(String.graphemes(input), fn x -> String.to_integer(x) end)
-
-IO.puts("Part one: #{Both_parts.solve(list_of_numbers, 1)}")
-IO.puts("Part two: #{Both_parts.solve(list_of_numbers, div(length(list_of_numbers), 2))}")
+IO.puts("Part one: #{Both_parts.solve(input, 1)}")
+IO.puts("Part two: #{Both_parts.solve(input, div(length(input), 2))}")
