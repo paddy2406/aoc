@@ -4,6 +4,11 @@ defmodule Main do
   def start(_, _) do
     IO.puts("HEllo World")
 
+    input = 347_991
+
+    IO.puts("Part one: #{Part_one.solve(input)}")
+    IO.puts("Part two: #{Part_two.solve(input)}")
+
     Task.start(fn ->
       nil
     end)
@@ -16,7 +21,7 @@ end
 
 defmodule Part_one do
   def solve(input) do
-    nil
+    input
   end
 end
 
@@ -25,8 +30,3 @@ defmodule Part_two do
     nil
   end
 end
-
-input = 347_991
-
-IO.puts("Part one: #{Part_one.solve(input)}")
-IO.puts("Part two: #{Part_two.solve(peter)}")

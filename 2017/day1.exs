@@ -1,3 +1,21 @@
+defmodule Main do
+  use Application
+
+  def start(_, _) do
+    input =
+      File.read!("input.txt")
+      |> String.graphemes()
+      |> Enum.map(fn x -> String.to_integer(x) end)
+
+    IO.puts("Part one: #{Both_parts.solve(input, 1)}")
+    IO.puts("Part two: #{Both_parts.solve(input, div(length(input), 2))}")
+
+    Task.start(fn ->
+      nil
+    end)
+  end
+end
+
 defmodule Both_parts do
   def solve(list, shift) do
     # Compare the list to a list that is shifted to the right
@@ -16,11 +34,3 @@ defmodule Both_parts do
     acc
   end
 end
-
-input =
-  File.read!("input.txt")
-  |> String.graphemes()
-  |> Enum.map(fn x -> String.to_integer(x) end)
-
-IO.puts("Part one: #{Both_parts.solve(input, 1)}")
-IO.puts("Part two: #{Both_parts.solve(input, div(length(input), 2))}")

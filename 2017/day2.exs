@@ -1,3 +1,22 @@
+defmodule Main do
+  use Application
+
+  def start(_, _) do
+    input =
+      File.read!("input.txt")
+      |> String.split("\n")
+      |> Enum.map(fn line -> String.split(line, "\t") end)
+      |> Enum.map(fn line -> Enum.map(line, fn x -> String.to_integer(x) end) end)
+
+    IO.puts("Part one: #{Part_one.solve(input)}")
+    IO.puts("Part two: #{Part_two.solve(input)}")
+
+    Task.start(fn ->
+      nil
+    end)
+  end
+end
+
 defmodule Part_one do
   def solve(input) do
     Enum.reduce(input, 0, fn line, acc -> acc + (Enum.max(line) - Enum.min(line)) end)
@@ -19,12 +38,3 @@ defmodule Part_two do
     end
   end
 end
-
-input =
-  File.read!("input.txt")
-  |> String.split("\n")
-  |> Enum.map(fn line -> String.split(line, "\t") end)
-  |> Enum.map(fn line -> Enum.map(line, fn x -> String.to_integer(x) end) end)
-
-IO.puts("Part one: #{Part_one.solve(input)}")
-IO.puts("Part two: #{Part_two.solve(input)}")
